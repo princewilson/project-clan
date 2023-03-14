@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
-from project_clan import passwords
-import requests
 from django.contrib.auth import logout
-
+from django.contrib import messages
 
 # Create your views here.
 def signup(request):
@@ -10,9 +8,15 @@ def signup(request):
 
 def callback(request):
     if request.user.is_authenticated:
-        return render(request, './accounts/dashboard.html')
+        messages.add_message(request, messages.SUCCESS, f"Welcome, {request.user.first_name}. You have logged in successfully.")
+        msgs = messages.get_messages(request)
+        data = {
+            'messages' : msgs
+        }
+        return render(request, './accounts/dashboard.html', data)
     return render(request, './base.html')
 
 def logout_user(request):
+    messages.add_message(request, messages.INFO, "You have logged out successfully.")
     logout(request)
     return redirect('base')

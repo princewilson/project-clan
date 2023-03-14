@@ -1,4 +1,8 @@
 from django.shortcuts import render
-
+from django.contrib import messages
 def base(request):
-    return render(request, './base.html')
+    msgs = messages.get_messages(request)
+    data = {
+        'messages' : msgs
+    }
+    return render(request, './base.html', data)
