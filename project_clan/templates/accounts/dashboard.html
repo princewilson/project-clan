@@ -33,7 +33,7 @@
                             </a>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="#">View Profile</a></li>
-                              <li><a class="dropdown-item" href="#">Post Something</a></li>
+                              <li><a class="dropdown-item" href="{% url 'make_a_post' %}">Post Something</a></li>
                               <li><a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a></li>                    
                             </ul>
                         </div>
@@ -74,7 +74,27 @@
     </div>
 
     <div class="postsSection container">
-        <div class="post mt-4">
+        {% for post in posts %}
+            <div class="post mt-4">
+                <div class="post-header d-flex align-items-center justify-content-start mb-2">
+                    <div class="post-profile-photo"><img src="{% static './assets/undraw_male_avatar.svg' %}" alt="an avatar" /></div>
+                    <div class="post-profile-name ps-2">User Name</div>
+                </div>
+                <div class="post-body">
+                    <div class="post-description mb-3">
+                        {{ post.description }}</div>
+                    <div class="post-image"><img src="{{ post.image.url }}" alt="certificate"></div>
+                </div>
+                <div class="post-stats mt-3">
+                    28 Likes and 15 Comments
+                </div>
+                <div class="post-reactions d-flex justify-content-evenly align-items-center mt-2">
+                    <div class="post-likes">Like</div>
+                    <div class="post-comments">Comment</div>
+                </div>
+            </div>
+        {% endfor %}
+        <!-- <div class="post mt-4">
             <div class="post-header d-flex align-items-center justify-content-start mb-2">
                 <div class="post-profile-photo"><img src="{% static './assets/undraw_male_avatar.svg' %}" alt="an avatar" /></div>
                 <div class="post-profile-name ps-2">User Name</div>
@@ -178,28 +198,7 @@
                 <div class="post-likes">Like</div>
                 <div class="post-comments">Comment</div>
             </div>
-        </div>
-        <div class="post mt-4">
-            <div class="post-header d-flex align-items-center justify-content-start mb-2">
-                <div class="post-profile-photo"><img src="{% static './assets/undraw_male_avatar.svg' %}" alt="an avatar" /></div>
-                <div class="post-profile-name ps-2">User Name</div>
-            </div>
-            <div class="post-body">
-                <div class="post-description mb-3">
-                    When learning how to code,
-                    you need something to indicate,
-                    how much you've scored,
-                    and you do that... with a HackerRank certificate!</div>
-                <div class="post-image"><img src="{% static './assets/certificate.png' %}" alt="certificate"></div>
-            </div>
-            <div class="post-stats mt-3">
-                28 Likes and 15 Comments
-            </div>
-            <div class="post-reactions d-flex justify-content-evenly align-items-center mt-2">
-                <div class="post-likes">Like</div>
-                <div class="post-comments">Comment</div>
-            </div>
-        </div>
+        </div> -->
     </div>
 
     <footer class="m-5 fs-5">
