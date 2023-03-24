@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib import messages
 from post_content.models import Post
+
 # Create your views here.
 def signup(request):
     return render(request, './accounts/signup.html')
@@ -13,7 +14,7 @@ def callback(request):
         posts = Post.objects.all()
         data = {
             'messages' : msgs,
-            'posts' : posts
+            'posts' : posts,
         }
         return render(request, './accounts/dashboard.html', data)
     return render(request, './base.html')
